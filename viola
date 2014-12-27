@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+CELLO_HEADER="
+#include <Cello.h>
+#include <Viola.h>
+int main(int argc, char** argv) {
+"
+CELLO_FOOTER="
+}"
+CELLO_FILE="build/cello.c"
+VIOLA_FILE=`cat "$1"`
+CELLO="build/cello"
+GCC_BUILD="gcc -o ${CELLO} -std=c99 -I${DIR}/include -I${CELLO_PATH}/include -L${CELLO_PATH} -lCello $CELLO_FILE"
+
+mkdir build 2> /dev/null
+echo "${CELLO_HEADER}${VIOLA_FILE}${CELLO_FOOTER}" > "$CELLO_FILE"
+export DYLD_LIBRARY_PATH=$CELLO_PATH
+eval "$GCC_BUILD && ${CELLO}"
