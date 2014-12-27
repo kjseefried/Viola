@@ -5,7 +5,9 @@ Taking the load off libCello.
 
 ##Introduction
 
-I saw libCello after it hit the top of Hackernews. It seemed like there were a number of ways to make this even more beginner friendly. I think there is a lot of potential for this library to be a standalone tool used for teaching beginning programmers and slowly weaning them towards manual memory management via a lite syntax.
+I saw https://github.com/orangeduck/libCello after it hit the top of Hackernews. It seemed like there were a number of ways to make this even more beginner friendly. I think there is a lot of potential for this library to be a standalone tool used for teaching beginning programmers and slowly weaning them towards manual memory management via a lite syntax.
+
+Viola depends on libCello and makes the task of programming with it all that easier. It supports much of libCello right off the bat. However, classes will not work. C-style function calls should also not work, however lambdas should be fair game.
 
 ##Setup
 
