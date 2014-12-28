@@ -19,9 +19,15 @@ Add this directory to your path.
 
 ##Example
 
-###list.v
+###example.v
 
-    var myList = List(Int(34), Int(6), String("I'm a string."))
+    function getList() {
+        return List(Int(34), Int(6), String("I'm a string."))
+    }
+
+    function getListRenamed() = getList;
+
+    var myList = getListRenamed()
 
     foreach (element in myList) {
         print("%s\n", element)
@@ -29,9 +35,17 @@ Add this directory to your path.
 
     delete(myList)
 
-####Compile
+####Compile (and Run)
 
-    viola list.v
+    viola example.v
+
+#####Note
+
+The built .c and binary files are stored in build/.
+
+###More
+
+Few examples/ for more.
 
 ##Incompatabilities with libCello
 
