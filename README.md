@@ -36,11 +36,11 @@ Add this directory to your path.
 ##Incompatabilities with libCello
 
 * Viola supports optional automatic semi-colon on expressions ending in parenthesis:
-** var f = 12; // requires semi-colon
-** var g = (12) // semi-colon is automatically inserted
-** print("%$\n", f) // semi-colon is automatically inserted
+	* var f = 12; // requires semi-colon
+	* var g = (12) // semi-colon is automatically inserted
+	* print("%$\n", f) // semi-colon is automatically inserted
 * Viola requires gcc to support nested functions.
-** Attempts to use nested functions will crash on other compilers
+	* Attempts to use nested functions will crash on other compilers
 * Viola adds a function fake type that can be used to simplify renaming functions
-** function foo(var) = existingFunctionThatTakesAVar;
-** Which is equivalent to function (*foo)(var) = existingFunctionThatTakesAVar;
+	* function foo(var) = existingFunctionThatTakesAVar;
+	* Which is equivalent to function (*foo)(var) = existingFunctionThatTakesAVar;
