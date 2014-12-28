@@ -1,7 +1,7 @@
 Viola
 =====
 
-Taking the load off libCello.
+Taking the load off libCello - a work in progress.
 
 ##Introduction
 
@@ -11,7 +11,7 @@ Viola depends on libCello and makes the task of programming with it all that eas
 
 Viola is a simple wrapper for libCello that allows the new programmers to go through a little less unnecessary "junk" to get their programs running. Nested functions in GNU C allow some neat tricks that couldn't be accomplished without picking up and relocating slabs of declarations. Most of Viola's simplifications rely on very simple string manipulation. It compiles to C and viola will run it automatically. Again, the intent is to make Viola very easy for new users to pick up and use hassle free. Unfortunately, the lack of operator overloading in C is an issue in terms of a truly simple programming API. 
 
-I haven't really had time to make documentation, but I wrote a number of examples in examples/ to demonstrate some of the cooler features in Viola.
+I haven't really had time to make documentation, but I wrote a number of examples in examples/ to demonstrate some of the cooler features in Viola. This is obviously a work in progress. Please feel free to make any suggestions or give any guidance!
 
 ##Setup
 
