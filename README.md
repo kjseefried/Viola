@@ -28,7 +28,7 @@ Add this directory to your path.
     var myList = Ints(Int(1), Int(2), Int(3))
 
     foreach (element in myList) {
-        print("%s\n", element)
+        print("%$\n", element)
     }
 
     delete(myList)
