@@ -7,7 +7,9 @@ Taking the load off libCello.
 
 I saw https://github.com/orangeduck/libCello after it hit the top of Hackernews. It seemed like there were a number of ways to make this even more beginner friendly. I think there is a lot of potential for this library to be a standalone tool used for teaching beginning programmers and slowly weaning them towards manual memory management via a lite syntax.
 
-Viola depends on libCello and makes the task of programming with it all that easier. It supports much of libCello right off the bat. However, classes will not work. C-style function calls should also not work, however lambdas should be fair game.
+Viola depends on libCello and makes the task of programming with it all that easier. It supports much of libCello right off the bat. However, classes may not work - but I'm not a big fan of the complex syntax anyway.
+
+Viola is a simple wrapper for libCello that allows the new programmers to go through a little less unnecessary "junk" to get their programs running. Nested functions in GNU C allow some neat tricks that couldn't be accomplished without picking up and relocating slabs of declarations. Most of Viola's simplifications rely on very simple string manipulation. It compiles to C and viola will run it automatically. Again, the intent is to make Viola very easy for new users to pick up and use hassle free. Unfortunately, the lack of operator overloading in C is an issue in terms of a truly simple programming API. 
 
 ##Setup
 
