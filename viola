@@ -1,8 +1,7 @@
 #!/bin/bash
 
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-CELLO_HEADER="
-#include <Cello.h>
+CELLO_HEADER="#include <Cello.h>
 #include <Viola.h>
 int main(int argc, char** argv) {
 "
@@ -10,10 +9,13 @@ CELLO_FOOTER="
 }"
 CELLO_FILE="build/cello.c"
 VIOLA_FILE=`cat "$1"`
+CELLO_FILE_CONTENTS="${CELLO_HEADER}${VIOLA_FILE}${CELLO_FOOTER}"
+CELLO_FILE_CONTENTS="${CELLO_FILE_CONTENTS//\)$'\n'/\);$'\n'}"
+CELLO_FILE_CONTENTS=`sed -e 's/function\([ ]*\)\([a-zA-Z][a-zA-Z0-9_]*[ ]*\)(\(.*=\)/function (*\2)(\3/g' <<< "$CELLO_FILE_CONTENTS"`
 CELLO="build/cello"
-GCC_BUILD="gcc -o ${CELLO} -std=c99 -I${DIR}/include -I${CELLO_PATH}/include -L${CELLO_PATH} -lCello $CELLO_FILE"
+GCC_BUILD="gcc -o ${CELLO} ${CELLO_FILE} -std=c99 -I${DIR}/include -lCello -lm -lpthread -ldl"
 
 mkdir build 2> /dev/null
-echo "${CELLO_HEADER}${VIOLA_FILE}${CELLO_FOOTER}" > "$CELLO_FILE"
+echo "${CELLO_FILE_CONTENTS}" > "$CELLO_FILE"
 export DYLD_LIBRARY_PATH=$CELLO_PATH
 eval "$GCC_BUILD && ${CELLO}"

@@ -21,4 +21,6 @@
 #define Thread() new(Thread)
 #define Pool() new(Pool)
 
+#define function var
+
 #endif
