@@ -21,13 +21,7 @@ Add this directory to your path.
 
 ###example.v
 
-    function getList() {
-        return List(Int(34), Int(6), String("I'm a string."))
-    }
-
-    function getListRenamed() = getList;
-
-    var myList = getListRenamed()
+    var myList = Ints(Int(1), Int(2), Int(3))
 
     foreach (element in myList) {
         print("%s\n", element)
