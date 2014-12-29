@@ -64,25 +64,25 @@ Check out examples/ for more.
 * Functions
     * "function" is just a mask for "var", but it is also used to simplify passing functions:
 
-        function add(var a, var b) {return sum(a, b)}
-        function addRenamed(var, var) = add; // same as "function (*addRenamed)(var, var) = add;"
+            function add(var a, var b) {return sum(a, b)}
+            function addRenamed(var, var) = add; // same as "function (*addRenamed)(var, var) = add;"
 
     * functions can be nested
 * Namespacing
     * Namespaces can be declared and all members must be declared at the time too.
 
-        namespace std (
-	    function (*_print)(var)
-        )
+            namespace std (
+	        function (*_print)(var)
+            )
 
-        function _print(var object) { show(object); } // needs semi-colon because the line does not end with )
-        std._print = _print;
+            function _print(var object) { show(object); } // needs semi-colon because the line does not end with )
+            std._print = _print;
 
-        std._print(Int(9))
+            std._print(Int(9))
 
 * Import
     * Viola files can be imported
 
-        import "local_file.v" // lets so it contains the above std namespace
+            import "local_file.v" // lets so it contains the above std namespace
 
-        std._print(String("I can import and use namespaces!"))
+            std._print(String("I can import and use namespaces!"))
