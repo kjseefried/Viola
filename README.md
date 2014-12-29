@@ -45,11 +45,11 @@ Check out examples/ for more.
 * Semi-optional semi-colons
     * Any expression ending in a right parenthesis can optionally omit an ending semi-colon:
 
-        var i = $(Int, 3); // needs semi-colon because line ends with comment not )
-        show(i)
-        int f = 3; // must have semi-colon
-        // doesn't need semi-colon
-        int g = (4)
+            var i = $(Int, 3); // needs semi-colon because line ends with comment not )
+            show(i)
+            int f = 3; // must have semi-colon
+            // doesn't need semi-colon
+            int g = (4)
 
 * Abbreviated access to creating objects
 
