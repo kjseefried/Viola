@@ -66,6 +66,8 @@ Check out examples/ for more.
 
             function add(var a, var b) {return sum(a, b)}
             function addRenamed(var, var) = add; // same as "function (*addRenamed)(var, var) = add;"
+            var res = addRenamed(Int(2), Int(3))
+            show(res)
 
     * functions can be nested
 * Namespacing
