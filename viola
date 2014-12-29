@@ -7,15 +7,32 @@ int main(int argc, char** argv) {
 "
 CELLO_FOOTER="
 }"
-CELLO_FILE="build/cello.c"
+export BUILD_DIR="build"
+CELLO_FILE="${BUILD_DIR}/cello.c"
+EVAL=0
+if [ $# -eq 2 ]; then
+	CELLO_FILE="${BUILD_DIR}/$1"
+	EVAL=1
+fi
 VIOLA_FILE=`cat "$1"`
-CELLO_FILE_CONTENTS="${CELLO_HEADER}${VIOLA_FILE}${CELLO_FOOTER}"
-CELLO_FILE_CONTENTS="${CELLO_FILE_CONTENTS//\)$'\n'/\);$'\n'}"
-CELLO_FILE_CONTENTS=`sed -e 's/function\([ ]*\)\([a-zA-Z][a-zA-Z0-9_]*[ ]*\)(\(.*=\)/function (*\2)(\3/g' <<< "$CELLO_FILE_CONTENTS"`
-CELLO="build/cello"
-GCC_BUILD="gcc -o ${CELLO} ${CELLO_FILE} -std=c99 -I${DIR}/include -lCello -lm -lpthread -ldl"
 
-mkdir build 2> /dev/null
+# Where the magic happens:
+VIOLA_FILE=$(perl -pe 's/\)\n/\);\n/g' <<< "$VIOLA_FILE")
+VIOLA_FILE=$(sed -e 's/function\([ ]*\)\([a-zA-Z][a-zA-Z0-9_]*[ ]*\)(\(.*=\)/function (*\2)(\3/g' <<< "$VIOLA_FILE")
+VIOLA_FILE=$(perl -pe 's/import[ ]*\"(.*)\"/"#include \"".`viola "$1" save`."$1\""/eg' <<< "$VIOLA_FILE")
+
+CELLO_FILE_CONTENTS="${CELLO_HEADER}${VIOLA_FILE}${CELLO_FOOTER}" 
+if [ $EVAL -eq 1 ]; then
+	CELLO_FILE_CONTENTS="$VIOLA_FILE"
+fi
+mkdir "${BUILD_DIR}" 2> /dev/null
 echo "${CELLO_FILE_CONTENTS}" > "$CELLO_FILE"
+
+if [ $EVAL -eq 1 ]; then
+	exit
+fi
+
+CELLO="${BUILD_DIR}/cello"
+GCC_BUILD="gcc -o ${CELLO} ${CELLO_FILE} -std=c99 -I${DIR}/include -lCello -lm -lpthread -ldl"
 export DYLD_LIBRARY_PATH=$CELLO_PATH
 eval "$GCC_BUILD && ${CELLO}"

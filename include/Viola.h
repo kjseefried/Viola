@@ -26,5 +26,9 @@
 #define Pool() new(Pool)
 
 #define function var
+#define namespace(name, members) \
+	typedef struct {\
+		members\
+	} VIOLA__##name; VIOLA__##name name;
 
 #endif
