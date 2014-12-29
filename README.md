@@ -88,3 +88,17 @@ Check out examples/ for more.
             import "local_file.v" // lets so it contains the above std namespace
 
             std._print(String("I can import and use namespaces!"))
+
+##Keywords, Restricted Functions
+
+The following keywords cannot be used as identifiers (in addition to any C keywords):
+* var, is, isnt, not, and, or, elif, in
+* local, global, class, data, instance
+* foreach, with, try, throw, catch
+* $, lit
+
+Due to the macro implementation of global functions in libCello, the following functions CANNOT be reused in any form in Viola (or libCello) files - this includes using these names as members in a namespace, struct, etc: (these are just a sample of the more obvious ones to remember)
+
+* print
+* new
+* construct
