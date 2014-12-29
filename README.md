@@ -7,19 +7,15 @@ Taking the load off libCello - a work in progress.
 
 I saw https://github.com/orangeduck/libCello after it hit the top of Hackernews. It seemed like there were a number of ways to make this even more beginner friendly. I think there is a lot of potential for this library to be a standalone tool used for teaching beginning programmers and slowly weaning them towards manual memory management via a lite syntax.
 
-Viola depends on libCello and makes the task of programming with it all that easier. It supports much of libCello right off the bat. However, classes may not work - but I'm not a big fan of the complex syntax anyway.
-
-Viola is a simple wrapper for libCello that allows the new programmers to go through a little less unnecessary "junk" to get their programs running. Nested functions in GNU C allow some neat tricks that couldn't be accomplished without picking up and relocating slabs of declarations. Most of Viola's simplifications rely on very simple string manipulation. It compiles to C and viola will run it automatically. Again, the intent is to make Viola very easy for new users to pick up and use hassle free. Unfortunately, the lack of operator overloading in C is an issue in terms of a truly simple programming API. 
+Viola depends on libCello to provide the backbone. The more interesting parts of Viola revolve around very simple (completely context-free) string replacements and a somewhat simpler/more-friendly API that sits on top of libCello. Furthermore, Viola is intended more as a "standalone" language for teaching.
 
 I haven't really had time to make documentation, but I wrote a number of examples in examples/ to demonstrate some of the cooler features in Viola. This is obviously a work in progress. Please feel free to make any suggestions or give any guidance!
 
 ##Setup
 
-Make and install (`make install`) libCello or export CELLO_PATH and add references to $CELLO_PATH in the GGC_BUILD variable in viola for the include and link path (-I${CELLO_PATH}/include and -L${CELLO_PATH}).
+Make and install (`make install`) libCello or add references (-I, -L) to the GCC_BUILD variable in ./viola.
 
-Make sure to compile the libCello library before trying to run Viola programs.
-
-Add this directory to your path.
+Add this directory to your path to access `viola`.
 
 ##Example
 
@@ -45,14 +41,39 @@ The built .c and binary files are stored in build/.
 
 Check out examples/ for more.
 
-##Incompatabilities with libCello
+##Features
+* Semi-optional semi-colons
+    * Any expression ending in a right parenthesis can optionally omit an ending semi-colon:
+    var i = $(Int, 3); // needs semi-colon because line ends with comment not )
+    show(i)
+    int f = 3; // must have semi-colon
+    // doesn't need semi-colon
+    int g = (4)
+* Abbreviated access to creating objects
+    // $(Int, 2)
+    var i = Int(2)
+    // $(String, "foo") and so on
+    var s = String("foo"
+    // Also works for lists of objects, heap memory is allocated here though
+    var l = List(Int(2), Int(4))
+    delete(l); // so don't forget to deallocate the memory.
+* Functions
+    * "function" is just a mask for "var", but it is also used to simplify passing functions:
+    function add(var a, var b) {return sum(a, b)}
+    function addRenamed(var, var) = add; // same as "function (*addRenamed)(var, var) = add;"
+    * functions can be nested
+* Namespacing
+    * Namespaces can be declared and all members must be declared at the time too.
+    namespace std (
+	function (*_print)(var)
+    )
 
-* Viola supports optional automatic semi-colon on expressions ending in parenthesis:
-	* var f = 12; // requires semi-colon
-	* var g = (12) // semi-colon is automatically inserted
-	* print("%$\n", f) // semi-colon is automatically inserted
-* Viola requires gcc to support nested functions.
-	* Attempts to use nested functions will crash on other compilers
-* Viola adds a function fake type that can be used to simplify renaming functions
-	* function foo(var) = existingFunctionThatTakesAVar;
-	* Which is equivalent to function (*foo)(var) = existingFunctionThatTakesAVar;
+    function _print(var object) { show(object); } // needs semi-colon because the line does not end with )
+    std._print = _print;
+
+    std._print(Int(9))
+* Import
+    * Viola files can be imported
+    import "local_file.v" // lets so it contains the above std namespace
+
+    std._print(String("I can import and use namespaces!"))
