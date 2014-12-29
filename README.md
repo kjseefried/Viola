@@ -44,12 +44,15 @@ Check out examples/ for more.
 ##Features
 * Semi-optional semi-colons
     * Any expression ending in a right parenthesis can optionally omit an ending semi-colon:
+
     var i = $(Int, 3); // needs semi-colon because line ends with comment not )
     show(i)
     int f = 3; // must have semi-colon
     // doesn't need semi-colon
     int g = (4)
+
 * Abbreviated access to creating objects
+
     // $(Int, 2)
     var i = Int(2)
     // $(String, "foo") and so on
@@ -57,13 +60,17 @@ Check out examples/ for more.
     // Also works for lists of objects, heap memory is allocated here though
     var l = List(Int(2), Int(4))
     delete(l); // so don't forget to deallocate the memory.
+
 * Functions
     * "function" is just a mask for "var", but it is also used to simplify passing functions:
+
     function add(var a, var b) {return sum(a, b)}
     function addRenamed(var, var) = add; // same as "function (*addRenamed)(var, var) = add;"
+
     * functions can be nested
 * Namespacing
     * Namespaces can be declared and all members must be declared at the time too.
+
     namespace std (
 	function (*_print)(var)
     )
@@ -72,8 +79,10 @@ Check out examples/ for more.
     std._print = _print;
 
     std._print(Int(9))
+
 * Import
     * Viola files can be imported
+
     import "local_file.v" // lets so it contains the above std namespace
 
     std._print(String("I can import and use namespaces!"))
