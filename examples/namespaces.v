@@ -1,13 +1,9 @@
-namespace
-(
-std,
-function (*_print)(var object)
+namespace std (
+	function (*_print)(var object)
 )
 
-namespace
-(
-std2,
-function (*_print)(var object)
+namespace std2 (
+	function (*_print)(var object)
 )
 
 function _print(var object) {
