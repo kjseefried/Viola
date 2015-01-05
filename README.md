@@ -56,7 +56,7 @@ Check out examples/ for more.
         // $(Int, 2)
         var i = Int(2)
         // $(String, "foo") and so on
-        var s = String("foo"
+        var s = String("foo")
         // Also works for lists of objects, heap memory is allocated here though
         var l = List(Int(2), Int(4))
         delete(l); // so don't forget to deallocate the memory.
@@ -85,7 +85,7 @@ Check out examples/ for more.
 * Import
     * Viola files can be imported
 
-            import "local_file.v" // lets so it contains the above std namespace
+            import "local_file.v" // contains the above std namespace
 
             std._print(String("I can import and use namespaces!"))
 
